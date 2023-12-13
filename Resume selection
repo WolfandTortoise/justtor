@@ -1,0 +1,132 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "280a2d69",
+   "metadata": {
+    "_cell_guid": "b1076dfc-b9ad-4769-8c92-a6c4dae69d19",
+    "_uuid": "8f2839f25d086af736a60e9eeb907d3b93b6e0e5",
+    "execution": {
+     "iopub.execute_input": "2023-12-13T20:37:14.032522Z",
+     "iopub.status.busy": "2023-12-13T20:37:14.031769Z",
+     "iopub.status.idle": "2023-12-13T20:37:19.424530Z",
+     "shell.execute_reply": "2023-12-13T20:37:19.422888Z"
+    },
+    "papermill": {
+     "duration": 5.399115,
+     "end_time": "2023-12-13T20:37:19.426682",
+     "exception": false,
+     "start_time": "2023-12-13T20:37:14.027567",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Candidate does not meet the pre-screening criteria.\n",
+      "Skills found: ['python', 'communication', 'teamwork']\n"
+     ]
+    }
+   ],
+   "source": [
+    "import spacy\n",
+    "\n",
+    "# Load the English NLP model\n",
+    "nlp = spacy.load(\"en_core_web_sm\")\n",
+    "\n",
+    "def pre_screen_resume(resume_text):\n",
+    "    # Tokenize the resume text\n",
+    "    doc = nlp(resume_text)\n",
+    "\n",
+    "    # Define skills required for the position\n",
+    "    required_skills = [\"python\", \"machine learning\", \"communication\", \"teamwork\"]\n",
+    "\n",
+    "    # Extract skills from the resume\n",
+    "    candidate_skills = [token.lemma_.lower() for token in doc if token.lemma_.lower() in required_skills]\n",
+    "\n",
+    "    # Determine if the candidate has the required skills\n",
+    "    has_required_skills = all(skill in candidate_skills for skill in required_skills)\n",
+    "\n",
+    "    return has_required_skills, candidate_skills\n",
+    "\n",
+    "# Example usage\n",
+    "resume_text = \"\"\"\n",
+    "I am a skilled Python developer with experience in machine learning. \n",
+    "My strong communication and teamwork skills make me an ideal candidate for the position.\n",
+    "\"\"\"\n",
+    "\n",
+    "result, skills = pre_screen_resume(resume_text)\n",
+    "\n",
+    "if result:\n",
+    "    print(\"Candidate meets the pre-screening criteria.\")\n",
+    "    print(\"Skills found:\", skills)\n",
+    "else:\n",
+    "    print(\"Candidate does not meet the pre-screening criteria.\")\n",
+    "    print(\"Skills found:\", skills)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "245f3ec5",
+   "metadata": {
+    "papermill": {
+     "duration": 0.001245,
+     "end_time": "2023-12-13T20:37:19.429776",
+     "exception": false,
+     "start_time": "2023-12-13T20:37:19.428531",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kaggle": {
+   "accelerator": "none",
+   "dataSources": [],
+   "dockerImageVersionId": 30626,
+   "isGpuEnabled": false,
+   "isInternetEnabled": false,
+   "language": "python",
+   "sourceType": "notebook"
+  },
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.12"
+  },
+  "papermill": {
+   "default_parameters": {},
+   "duration": 9.24554,
+   "end_time": "2023-12-13T20:37:20.761333",
+   "environment_variables": {},
+   "exception": null,
+   "input_path": "__notebook__.ipynb",
+   "output_path": "__notebook__.ipynb",
+   "parameters": {},
+   "start_time": "2023-12-13T20:37:11.515793",
+   "version": "2.4.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
